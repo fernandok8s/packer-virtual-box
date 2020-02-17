@@ -1,0 +1,25 @@
+{
+  "builders": [
+    {
+      "guest_os_type": "Ubuntu_64",
+      "type": "virtualbox-iso",
+      "iso_checksum_type": "sha256",
+      "iso_checksum": "b4667b8f6d863271a014855d0f55b365f956bcdf8c691c8a3741b60d905e9647",
+      "iso_urls": "http://archive.ubuntu.com/ubuntu/dists/bionic-updates/main/installer-amd64/current/images/netboot/mini.iso" ,
+      "ssh_username": "packer",
+      "ssh_password": "packer",
+      "ssh_wait_timeout": "60m",
+      "shutdown_command": "echo 'conda' | sudo -S shutdown -P now",
+      "http_directory": "http",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<tab>",
+        "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu-preseed.cfg ",
+        "auto=true ",
+        "initrd=initrd.gz ",
+        "hostname=test ",
+        "<enter>"
+      ]
+    }
+  ]
+}
